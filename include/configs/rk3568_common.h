@@ -34,6 +34,8 @@
 #define GICD_BASE			0xfd400000
 #define GICR_BASE			0xfd460000
 #define GICC_BASE			0xfd800000
+#define CONFIG_BOOTCOUNT_LIMIT
+#define CONFIG_BOOTCOUNT_ENV
 
 /* secure otp */
 #define OTP_UBOOT_ROLLBACK_OFFSET	0xe0
@@ -89,7 +91,11 @@
 	"partitions=" PARTS_RKIMG \
 	ROCKCHIP_DEVICE_SETTINGS \
 	RKIMG_DET_BOOTDEV \
-	BOOTENV
+	BOOTENV \
+	"bootlimit=5\0" \
+	"rootfspart=3\0" \
+	"bootargs=root=/dev/mmcblk2p${rootfspart} rdinit=/bin/kinit rw single\0" \
+	"altbootcmd=echo Rollback to previous RootFs; if test ${rootfspart} = 3; then setenv rootfspart 4; else setenv rootfspart 3; fi; setenv bootcount 0; saveenv; bootcmd\0"
 
 #undef RKIMG_BOOTCOMMAND
 #define RKIMG_BOOTCOMMAND		\
