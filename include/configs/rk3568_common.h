@@ -15,6 +15,10 @@
 #define CFG_SYS_SDRAM_BASE		0
 #define SDRAM_MAX_SIZE			0xf0000000
 
+#define CONFIG_BOOTCOUNT_LIMIT
+#define CONFIG_BOOTCOUNT_ENV
+
+
 #define ENV_MEM_LAYOUT_SETTINGS		\
 	"scriptaddr=0x00c00000\0"	\
 	"script_offset_f=0xffe000\0"	\
@@ -32,6 +36,10 @@
 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
 	"partitions=" PARTS_DEFAULT		\
 	ROCKCHIP_DEVICE_SETTINGS \
-	"boot_targets=" BOOT_TARGETS "\0"
+	"boot_targets=" BOOT_TARGETS "\0" \
+	"bootlimit=5\0" \ 
+	"rootfspart=3\0" \
+	"bootargs=root=/dev/mmcblk2p${rootfspart} rdinit=/bin/kinit rw single\0" \
+	"altbootcmd=echo Rollback to previous RootFs; if test ${rootfspart} = 3; then setenv rootfspart 4; else setenv rootfspart 3; fi; setenv bootcount 0; saveenv; bootcmd\0"
 
 #endif
