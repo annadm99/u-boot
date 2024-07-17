@@ -34,8 +34,10 @@
 #define GICD_BASE			0xfd400000
 #define GICR_BASE			0xfd460000
 #define GICC_BASE			0xfd800000
+
 #define CONFIG_BOOTCOUNT_LIMIT
 #define CONFIG_BOOTCOUNT_ENV
+#define CONFIG_SYS_BOOTCOUNT_BE
 
 /* secure otp */
 #define OTP_UBOOT_ROLLBACK_OFFSET	0xe0
