@@ -134,3 +134,7 @@ CONFIG_CMD_ENV_EXISTS=y
 #CONFIG_ENV_IS_IN_FLASH=y
 CONFIG_ENV_IS_IN_MMC=y
 CONFIG_ENV_IS_NOWHERE=n
+#try to define it manually with data from https://github.com/annadm99/u-boot/blob/rk3568-2023.10/env/Kconfig
+CONFIG_ENV_SIZE=0x8000
+CONFIG_ENV_OFFSET=0x3f8000
+
