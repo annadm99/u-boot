@@ -9,6 +9,10 @@
 
 #include "rockchip-common.h"
 
+#define CONFIG_BOOTCOUNT_LIMIT
+#define CONFIG_BOOTCOUNT_ENV
+#define CONFIG_SYS_BOOTCOUNT_BE
+
 #define CONFIG_SPL_FRAMEWORK
 #define CONFIG_SPL_TEXT_BASE		0x00000000
 #define CONFIG_SPL_MAX_SIZE		0x00040000
@@ -88,16 +92,22 @@
 #include <config_distro_bootcmd.h>
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
-	ENV_MEM_LAYOUT_SETTINGS \
-	"fdtfile=" FDTFILE \
-	"partitions=" PARTS_RKIMG \
-	ROCKCHIP_DEVICE_SETTINGS \
-	RKIMG_DET_BOOTDEV \
-	BOOTENV \
-	"bootlimit=5\0" \
-	"rootfspart=3\0" \
-	"bootargs=root=/dev/mmcblk2p${rootfspart} rdinit=/bin/kinit rw single\0" \
-	"altbootcmd=echo Rollback to previous RootFs; if test ${rootfspart} = 3; then setenv rootfspart 4; else setenv rootfspart 3; fi; setenv bootcount 0; saveenv; bootcmd\0"
+    ENV_MEM_LAYOUT_SETTINGS \
+    "fdtfile=" FDTFILE "\0" \
+    "partitions=" PARTS_RKIMG "\0" \
+    ROCKCHIP_DEVICE_SETTINGS \
+    RKIMG_DET_BOOTDEV \
+    BOOTENV \
+    "bootlimit=5\0" \
+    "rootfspart=3\0" \
+    "bootargs=root=/dev/mmcblk2p${rootfspart} rdinit=/bin/kinit rw single\0" \
+    "altbootcmd=echo Rollback to previous RootFs; " \
+        "if test ${rootfspart} = 3; then " \
+            "setenv rootfspart 4; " \
+        "else " \
+            "setenv rootfspart 3; " \
+        "fi; " \
+        "setenv bootcount 0; saveenv; bootcmd\0"
 
 #undef RKIMG_BOOTCOMMAND
 #define RKIMG_BOOTCOMMAND		\
