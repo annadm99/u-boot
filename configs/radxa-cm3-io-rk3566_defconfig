@@ -234,3 +234,7 @@ CONFIG_ENV_IS_NOWHERE=n
 CONFIG_BOOTCOUNT_LIMIT=y
 CONFIG_BOOTCOUNT_ENV=y
 CONFIG_SYS_BOOTCOUNT_BE=y
+
+#try to define it manually with data from https://github.com/annadm99/u-boot/blob/rk3568-2023.10/env/Kconfig
+CONFIG_ENV_SIZE=0x8000
+CONFIG_ENV_OFFSET=0x3f8000
