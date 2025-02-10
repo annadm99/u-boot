@@ -41,6 +41,6 @@
 	"bootlimit=5\0" \ 
 	"rootfspart=3\0" \
 	"bootargs=root=/dev/mmcblk2p${rootfspart} rdinit=/bin/kinit rw single\0" \
-	"altbootcmd=echo Rollback to previous RootFs; if test ${rootfspart} = 3; then setenv rootfspart 4; else setenv rootfspart 3; fi; setenv bootcount 0; saveenv; bootcmd\0"
+	"altbootcmd=echo Rollback to previous RootFs; if test ${rootfspart} = 3; then setenv rootfspart 4; else setenv rootfspart 3; fi; setenv bootcount 0; saveenv; run bootcmd\0"
 
 #endif
